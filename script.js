@@ -44,4 +44,5 @@ function selectMenu(selectedIndex) {
 }
 
 function showResult(winner) {
-  document.querySelector("#game-container").style.display = "
+  document.querySelector("#winner-name").innerText = "최종 우승은 " + winner.name;
+
