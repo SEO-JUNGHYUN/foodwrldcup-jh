@@ -1,3 +1,6 @@
+console.log("✅ script.js 연결됨");
+
+
 const menuList = [
   { name: "김치찌개", img: "assets/menu1.jpg" },
   { name: "돈까스", img: "assets/menu2.jpg" },
