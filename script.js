@@ -44,5 +44,11 @@ function selectMenu(selectedIndex) {
 }
 
 function showResult(winner) {
+  document.querySelector("#game-container").style.display = "none";
+  const resultSection = document.querySelector("#result");
+  resultSection.style.display = "block";
+  document.querySelector("#winner-img").src = winner.img;
   document.querySelector("#winner-name").innerText = "최종 우승은 " + winner.name;
+}
 
+document.addEventListener("DOMContentLoaded", showMenus);
