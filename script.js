@@ -1,6 +1,3 @@
-console.log("✅ script.js 연결됨");
-
-
 const menuList = [
   { name: "김치찌개", img: "assets/menu1.jpg" },
   { name: "돈까스", img: "assets/menu2.jpg" },
@@ -47,11 +44,4 @@ function selectMenu(selectedIndex) {
 }
 
 function showResult(winner) {
-  document.querySelector("#game-container").style.display = "none";
-  const resultSection = document.querySelector("#result");
-  resultSection.style.display = "block";
-  document.querySelector("#winner-img").src = winner.img;
-  document.querySelector("#winner-name").innerText = winner.name;
-}
-
-window.onload = showMenus;
+  document.querySelector("#game-container").style.display = "
