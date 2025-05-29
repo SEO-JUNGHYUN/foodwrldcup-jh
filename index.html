@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-  <title>오늘 뭐 먹지?</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>점심 메뉴 월드컵</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>점심 메뉴 월드컵</h1>
-  <p>준비 중입니다...</p>
+  <h1>점심 메뉴 월드컵 🍽️</h1>
+  <div id="game-container">
+    <div class="menu" id="menu1">
+      <img src="assets/menu1.jpg" alt="메뉴 1">
+      <button class="select-btn" onclick="selectMenu(0)">선택</button>
+    </div>
+    <div class="menu" id="menu2">
+      <img src="assets/menu2.jpg" alt="메뉴 2">
+      <button class="select-btn" onclick="selectMenu(1)">선택</button>
+    </div>
+  </div>
+  <div id="result" style="display: none;">
+    <h2>최종 선택 메뉴는?</h2>
+    <img id="winner-img" src="" alt="우승 메뉴">
+    <p id="winner-name"></p>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
