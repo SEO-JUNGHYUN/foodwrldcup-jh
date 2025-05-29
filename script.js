@@ -1,66 +1,54 @@
-body {
-  font-family: 'Arial', sans-serif;
-  text-align: center;
-  background-color: #f9f9f9;
-  margin: 0;
-  padding: 0;
+const menuList = [
+  { name: "김치찌개", img: "assets/menu1.jpg" },
+  { name: "돈까스", img: "assets/menu2.jpg" },
+  { name: "제육볶음", img: "assets/menu3.jpg" },
+  { name: "비빔밥", img: "assets/menu4.jpg" },
+  { name: "냉면", img: "assets/menu5.jpg" },
+  { name: "햄버거", img: "assets/menu6.jpg" },
+  { name: "짬뽕", img: "assets/menu7.jpg" },
+  { name: "칼국수", img: "assets/menu8.jpg" }
+];
+
+let currentRound = [...menuList];
+let nextRound = [];
+let currentPairIndex = 0;
+
+function showMenus() {
+  const [menu1, menu2] = [currentRound[currentPairIndex], currentRound[currentPairIndex + 1]];
+
+  document.querySelector("#menu1 img").src = menu1.img;
+  document.querySelector("#menu1 img").alt = menu1.name;
+  document.querySelector("#menu1 .select-btn").innerText = menu1.name;
+
+  document.querySelector("#menu2 img").src = menu2.img;
+  document.querySelector("#menu2 img").alt = menu2.name;
+  document.querySelector("#menu2 .select-btn").innerText = menu2.name;
 }
 
-h1 {
-  background-color: #ffb74d;
-  color: white;
-  padding: 20px 0;
-  margin: 0;
+function selectMenu(selectedIndex) {
+  const selectedMenu = currentRound[currentPairIndex + selectedIndex];
+  nextRound.push(selectedMenu);
+  currentPairIndex += 2;
+
+  if (currentPairIndex >= currentRound.length) {
+    if (nextRound.length === 1) {
+      showResult(nextRound[0]);
+      return;
+    }
+    currentRound = [...nextRound];
+    nextRound = [];
+    currentPairIndex = 0;
+  }
+
+  showMenus();
 }
 
-#game-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  margin-top: 50px;
-  flex-wrap: wrap;
+function showResult(winner) {
+  document.querySelector("#game-container").style.display = "none";
+  const resultSection = document.querySelector("#result");
+  resultSection.style.display = "block";
+  document.querySelector("#winner-img").src = winner.img;
+  document.querySelector("#winner-name").innerText = winner.name;
 }
 
-.menu {
-  width: 200px;
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  padding: 15px;
-}
-
-.menu img {
-  width: 100%;
-  border-radius: 8px;
-}
-
-.select-btn {
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #ff7043;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.select-btn:hover {
-  background-color: #f4511e;
-}
-
-#result {
-  margin-top: 50px;
-}
-
-#result img {
-  width: 300px;
-  border-radius: 12px;
-}
-
-#winner-name {
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 10px;
-}
+window.onload = showMenus;
