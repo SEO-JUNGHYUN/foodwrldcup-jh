@@ -19,10 +19,9 @@ function shuffle(array) {
   return array;
 }
 
-menus = shuffle(menus);
-
+// 초기화
 let round = 8;
-let roundMenus = [...menus];
+let roundMenus = [];
 let nextRoundMenus = [];
 let currentPair = 0;
 
@@ -34,6 +33,23 @@ const resultSection = document.getElementById("result");
 const winnerName = document.getElementById("winner-name");
 const winnerImg = document.getElementById("winner-img");
 const progressBar = document.getElementById("progress-bar");
+
+// 시작 버튼 이벤트
+document.getElementById("start-btn").addEventListener("click", () => {
+  document.getElementById("start-screen").style.display = "none";
+  document.getElementById("main-content").style.display = "block";
+
+  // 초기화 및 시작
+  menus = shuffle(menus);
+  roundMenus = [...menus];
+  nextRoundMenus = [];
+  currentPair = 0;
+  round = 8;
+
+  updateRoundText();
+  updateProgressBar();
+  showNextPair();
+});
 
 function updateRoundText() {
   if (round === 8) roundInfo.textContent = "8강";
@@ -108,6 +124,3 @@ function copyLink() {
 
   document.getElementById("copy-msg").textContent = "링크가 복사되었어요! 친구에게 보내보세요.";
 }
-
-updateRoundText();
-showNextPair();
