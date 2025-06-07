@@ -2,27 +2,24 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>점심 메뉴 월드컵</title>
+  <title>점심 메뉴 월드컵 🍽️</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>점심 메뉴 월드컵 🍽️</h1>
-  <div id="game-container">
-    <div class="menu" id="menu1">
-      <img src="assets/menu1.jpg" alt="메뉴 1">
-      <button class="select-btn" onclick="selectMenu(0)">선택</button>
-    </div>
-    <div class="menu" id="menu2">
-      <img src="assets/menu2.jpg" alt="메뉴 2">
-      <button class="select-btn" onclick="selectMenu(1)">선택</button>
-    </div>
+  <div id="round-info">16강</div>
+
+  <div class="menu" id="menu1">
+    <img src="assets/menu1.jpg" alt="메뉴 1">
+    <button class="select-btn" onclick="selectMenu(0)">선택</button>
   </div>
-  <div id="result" style="display: none;">
-    <h2>최종 선택 메뉴는?</h2>
-    <img id="winner-img" src="" alt="우승 메뉴">
-    <p id="winner-name"></p>
+  <div class="menu" id="menu2">
+    <img src="assets/menu2.jpg" alt="메뉴 2">
+    <button class="select-btn" onclick="selectMenu(1)">선택</button>
   </div>
+
+  <button id="copy-btn" onclick="copyLink()">이 페이지 링크 복사하기</button>
+  <div id="copy-msg"></div>
 
   <script src="script.js"></script>
 </body>
