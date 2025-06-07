@@ -1,3 +1,4 @@
+/* 기본 스타일 */
 body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #f9f9f9;
@@ -8,6 +9,31 @@ body {
 h1 {
   font-size: 32px;
   margin-bottom: 10px;
+}
+
+/* 시작 화면 */
+#start-screen {
+  display: block;
+}
+
+#start-screen p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+#start-btn {
+  padding: 12px 20px;
+  font-size: 18px;
+  border: none;
+  background-color: #2ecc71;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#start-btn:hover {
+  background-color: #27ae60;
 }
 
 #round-info {
@@ -83,10 +109,6 @@ h1 {
   width: 250px;
   border-radius: 10px;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
-}
-
-button {
-  font-family: inherit;
 }
 
 #copy-msg {
