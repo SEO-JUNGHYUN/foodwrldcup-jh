@@ -1,5 +1,5 @@
 // 8개의 점심 메뉴 이미지 경로와 이름
-const menus = [
+let menus = [
   { name: "김치찌개", img: "assets/menu1.jpg" },
   { name: "돈까스", img: "assets/menu2.jpg" },
   { name: "제육볶음", img: "assets/menu3.jpg" },
@@ -9,6 +9,17 @@ const menus = [
   { name: "짬뽕", img: "assets/menu7.jpg" },
   { name: "칼국수", img: "assets/menu8.jpg" }
 ];
+
+// 메뉴를 랜덤하게 섞기 (Fisher–Yates shuffle)
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+menus = shuffle(menus);
 
 let round = 8;
 let roundMenus = [...menus];
@@ -31,9 +42,7 @@ function updateRoundText() {
 
 function showNextPair() {
   if (currentPair * 2 >= roundMenus.length) {
-    // 다음 라운드로 넘어가기
     if (nextRoundMenus.length === 1) {
-      // 최종 우승자 결정
       showWinner(nextRoundMenus[0]);
     } else {
       round = nextRoundMenus.length;
@@ -49,13 +58,19 @@ function showNextPair() {
   const menu1 = roundMenus[currentPair * 2];
   const menu2 = roundMenus[currentPair * 2 + 1];
 
-  menu1El.querySelector("img").src = menu1.img;
-  menu1El.querySelector("img").alt = menu1.name;
-  menu1El.querySelector(".select-btn").textContent = `${menu1.name} 선택`;
+  updateMenuElement(menu1El, menu1);
+  updateMenuElement(menu2El, menu2);
+}
 
-  menu2El.querySelector("img").src = menu2.img;
-  menu2El.querySelector("img").alt = menu2.name;
-  menu2El.querySelector(".select-btn").textContent = `${menu2.name} 선택`;
+function updateMenuElement(menuEl, menuData) {
+  const imgEl = menuEl.querySelector("img");
+  const btnEl = menuEl.querySelector(".select-btn");
+  const labelEl = menuEl.querySelector(".menu-name");
+
+  imgEl.src = menuData.img;
+  imgEl.alt = menuData.name;
+  btnEl.textContent = `${menuData.name} 선택`;
+  labelEl.textContent = menuData.name;
 }
 
 function selectMenu(index) {
