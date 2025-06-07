@@ -33,11 +33,19 @@ const gameContainer = document.getElementById("game-container");
 const resultSection = document.getElementById("result");
 const winnerName = document.getElementById("winner-name");
 const winnerImg = document.getElementById("winner-img");
+const progressBar = document.getElementById("progress-bar");
 
 function updateRoundText() {
   if (round === 8) roundInfo.textContent = "8강";
   else if (round === 4) roundInfo.textContent = "4강";
   else if (round === 2) roundInfo.textContent = "결승전";
+}
+
+function updateProgressBar() {
+  const totalMatches = 7; // 8강(4)+4강(2)+결승(1)
+  const played = totalMatches - (roundMenus.length / 2 + nextRoundMenus.length / 2);
+  const percentage = Math.round((played / totalMatches) * 100);
+  progressBar.style.width = `${percentage}%`;
 }
 
 function showNextPair() {
@@ -60,6 +68,7 @@ function showNextPair() {
 
   updateMenuElement(menu1El, menu1);
   updateMenuElement(menu2El, menu2);
+  updateProgressBar();
 }
 
 function updateMenuElement(menuEl, menuData) {
@@ -69,7 +78,7 @@ function updateMenuElement(menuEl, menuData) {
 
   imgEl.src = menuData.img;
   imgEl.alt = menuData.name;
-  btnEl.textContent = `${menuData.name} 선택`;
+  btnEl.textContent = "선택";
   labelEl.textContent = menuData.name;
 }
 
@@ -86,6 +95,7 @@ function showWinner(menu) {
   winnerName.textContent = menu.name;
   winnerImg.src = menu.img;
   winnerImg.alt = menu.name;
+  progressBar.style.width = "100%";
 }
 
 function copyLink() {
