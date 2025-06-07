@@ -1,26 +1,42 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>점심 메뉴 월드컵 🍽️</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>점심 메뉴 월드컵 🍽️</h1>
-  <div id="round-info">16강</div>
+let totalMenus = 16;
+let currentRound = totalMenus;
+const roundInfo = document.getElementById('round-info');
 
-  <div class="menu" id="menu1">
-    <img src="assets/menu1.jpg" alt="메뉴 1">
-    <button class="select-btn" onclick="selectMenu(0)">선택</button>
-  </div>
-  <div class="menu" id="menu2">
-    <img src="assets/menu2.jpg" alt="메뉴 2">
-    <button class="select-btn" onclick="selectMenu(1)">선택</button>
-  </div>
+// 라운드 텍스트 업데이트
+function updateRoundText() {
+  if (currentRound === 16) roundInfo.textContent = '16강';
+  else if (currentRound === 8) roundInfo.textContent = '8강';
+  else if (currentRound === 4) roundInfo.textContent = '4강';
+  else if (currentRound === 2) roundInfo.textContent = '결승전';
+  else roundInfo.textContent = '우승';
+}
 
-  <button id="copy-btn" onclick="copyLink()">이 페이지 링크 복사하기</button>
-  <div id="copy-msg"></div>
+// 메뉴 선택 처리 (실제 로직은 필요에 따라 구현)
+function selectMenu(index) {
+  console.log("선택된 메뉴:", index);
+  currentRound = currentRound / 2;
+  if (currentRound >= 2) {
+    updateRoundText();
+  } else {
+    roundInfo.textContent = '우승!';
+    document.getElementById('menu1').style.display = 'none';
+    document.getElementById('menu2').style.display = 'none';
+  }
+}
 
-  <script src="script.js"></script>
-</body>
-</html>
+// 링크 복사 기능
+function copyLink() {
+  const dummyInput = document.createElement('input');
+  const pageUrl = window.location.href;
+  dummyInput.value = pageUrl;
+  document.body.appendChild(dummyInput);
+  dummyInput.select();
+  document.execCommand('copy');
+  document.body.removeChild(dummyInput);
+
+  const msg = document.getElementById('copy-msg');
+  msg.textContent = '링크가 복사되었어요! 친구에게 붙여넣기 하세요.';
+}
+
+// 초기 실행
+updateRoundText();
