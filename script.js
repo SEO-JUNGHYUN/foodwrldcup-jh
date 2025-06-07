@@ -1,54 +1,43 @@
-const menuList = [
-  { name: "김치찌개", img: "assets/menu1.jpg" },
-  { name: "돈까스", img: "assets/menu2.jpg" },
-  { name: "제육볶음", img: "assets/menu3.jpg" },
-  { name: "비빔밥", img: "assets/menu4.jpg" },
-  { name: "냉면", img: "assets/menu5.jpg" },
-  { name: "햄버거", img: "assets/menu6.jpg" },
-  { name: "짬뽕", img: "assets/menu7.jpg" },
-  { name: "칼국수", img: "assets/menu8.jpg" }
-];
+// 기본 변수들
+let totalMenus = 16;
+let currentRound = totalMenus;
+const roundInfo = document.getElementById('round-info');
 
-let currentRound = [...menuList];
-let nextRound = [];
-let currentPairIndex = 0;
-
-function showMenus() {
-  const [menu1, menu2] = [currentRound[currentPairIndex], currentRound[currentPairIndex + 1]];
-
-  document.querySelector("#menu1 img").src = menu1.img;
-  document.querySelector("#menu1 img").alt = menu1.name;
-  document.querySelector("#menu1 .select-btn").innerText = menu1.name;
-
-  document.querySelector("#menu2 img").src = menu2.img;
-  document.querySelector("#menu2 img").alt = menu2.name;
-  document.querySelector("#menu2 .select-btn").innerText = menu2.name;
+// 라운드 텍스트 업데이트
+function updateRoundText() {
+  if (currentRound === 16) roundInfo.textContent = '16강';
+  else if (currentRound === 8) roundInfo.textContent = '8강';
+  else if (currentRound === 4) roundInfo.textContent = '4강';
+  else if (currentRound === 2) roundInfo.textContent = '결승전';
+  else roundInfo.textContent = '우승';
 }
 
-function selectMenu(selectedIndex) {
-  const selectedMenu = currentRound[currentPairIndex + selectedIndex];
-  nextRound.push(selectedMenu);
-  currentPairIndex += 2;
-
-  if (currentPairIndex >= currentRound.length) {
-    if (nextRound.length === 1) {
-      showResult(nextRound[0]);
-      return;
-    }
-    currentRound = [...nextRound];
-    nextRound = [];
-    currentPairIndex = 0;
+// 메뉴 선택 처리 (실제 로직은 필요에 따라 구현)
+function selectMenu(index) {
+  console.log("선택된 메뉴:", index);
+  currentRound = currentRound / 2;
+  if (currentRound >= 2) {
+    updateRoundText();
+  } else {
+    roundInfo.textContent = '우승!';
+    document.getElementById('menu1').style.display = 'none';
+    document.getElementById('menu2').style.display = 'none';
   }
-
-  showMenus();
 }
 
-function showResult(winner) {
-  document.querySelector("#game-container").style.display = "none";
-  const resultSection = document.querySelector("#result");
-  resultSection.style.display = "block";
-  document.querySelector("#winner-img").src = winner.img;
-  document.querySelector("#winner-name").innerText = "최종 우승은 " + winner.name;
+// 링크 복사 기능
+function copyLink() {
+  const dummyInput = document.createElement('input');
+  const pageUrl = window.location.href;
+  dummyInput.value = pageUrl;
+  document.body.appendChild(dummyInput);
+  dummyInput.select();
+  document.execCommand('copy');
+  document.body.removeChild(dummyInput);
+
+  const msg = document.getElementById('copy-msg');
+  msg.textContent = '링크가 복사되었어요! 친구에게 붙여넣기 하세요.';
 }
 
-document.addEventListener("DOMContentLoaded", showMenus);
+// 초기 실행
+updateRoundText();
