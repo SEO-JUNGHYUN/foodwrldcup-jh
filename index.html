@@ -6,20 +6,28 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>점심 메뉴 월드컵 🍽️</h1>
-  <div id="round-info">16강</div>
+  <h1>점심 메뉴 월드컵 🍱</h1>
+  <div id="round-info">8강</div>
 
-  <div class="menu" id="menu1">
-    <img src="assets/menu1.jpg" alt="메뉴 1">
-    <button class="select-btn" onclick="selectMenu(0)">선택</button>
-  </div>
-  <div class="menu" id="menu2">
-    <img src="assets/menu2.jpg" alt="메뉴 2">
-    <button class="select-btn" onclick="selectMenu(1)">선택</button>
+  <div id="game-container">
+    <div class="menu" id="menu1">
+      <img src="assets/menu1.jpg" alt="메뉴 1">
+      <button class="select-btn" onclick="selectMenu(0)">선택</button>
+    </div>
+    <div class="menu" id="menu2">
+      <img src="assets/menu2.jpg" alt="메뉴 2">
+      <button class="select-btn" onclick="selectMenu(1)">선택</button>
+    </div>
   </div>
 
-  <button id="copy-btn" onclick="copyLink()">이 페이지 링크 복사하기</button>
-  <div id="copy-msg"></div>
+  <div id="result" style="display: none;">
+    <h2>오늘의 점심식사는 <span id="winner-name"></span>입니다! 🍽️</h2>
+    <img id="winner-img" src="" alt="우승 메뉴" width="250">
+    <div>
+      <button onclick="copyLink()">친구에게 공유하기</button>
+      <p id="copy-msg" style="color: green;"></p>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
